@@ -10,7 +10,13 @@ paragraph with class
 line with class .class2
 
 line with word.class4 with class
+
+some sentence
+.b with many words
+to bold
 TEXT;
+
+echo "<pre>$text</pre>";
 
 $text = preg_replace('/[ \t]+/', ' ', $text);
 $text = str_replace("\r\n", "\n", $text);
@@ -27,6 +33,7 @@ foreach ($paragraphs as &$item) {
     $item = $lines;
 }
 unset($item);
+
 
 foreach ($paragraphs as $item) {
     if (count($item[0]) == 1 && $item[0][0][0] == '.') {
@@ -62,4 +69,6 @@ foreach ($paragraphs as $item) {
 
     echo '</p>';
 }
+
+echo '<style>.class1{font-size:16pt;}.b{font-weight:bold}</style>';
 
