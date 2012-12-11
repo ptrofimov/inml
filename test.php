@@ -119,9 +119,18 @@ foreach($paragraphs as $item){
     if(count($item[0])==1&&$item[0][0][0]=='.'){
         $class=substr($item[0][0],1);
         echo "<p class='$class'>";
+        array_shift($item);
     }else echo '<p>';
 
     foreach($item as &$item2){
+        foreach($item2 as &$item3){
+            $parts=explode('.',$item3);
+            if(count($parts)==2&&strlen($parts[0])&&strlen($parts[1])){
+                $item3="<span class='{$parts[1]}'>{$parts[0]}</span>";
+            }
+        }
+        unset($item3);
+
         if($item2[0][0]=='.'){
             $class=substr($item2[0],1);
             array_shift($item2);
