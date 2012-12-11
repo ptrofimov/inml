@@ -120,6 +120,24 @@ foreach($paragraphs as $item){
         $class=substr($item[0][0],1);
         echo "<p class='$class'>";
     }else echo '<p>';
+
+    foreach($item as &$item2){
+        if($item2[0][0]=='.'){
+            $class=substr($item2[0],1);
+            array_shift($item2);
+            $item2="<span class='$class'>".implode(' ',$item2).'</span>';
+        }elseif($item2[count($item2)-1][0]=='.'){
+            $class=substr($item2[count($item2)-1],1);
+            array_pop($item2);
+            $item2="<span class='$class'>".implode(' ',$item2).'</span>';
+        }else{
+            $item2=implode(' ',$item2);
+        }
+    }
+    unset($item2);
+
+    echo implode(' ',$item);
+
     echo '</p>';
 }
 
