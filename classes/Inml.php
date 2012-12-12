@@ -1,44 +1,79 @@
 <?php
+/**
+ * Class to render inML into HTML
+ *
+ * @author Petr Trofimov <petrofimov@yandex.ru>
+ */
 class Inml
 {
+    const BREAK_LINE = "\n";
+    const BREAK_PARAGRAPH = "\n\n";
+
+    /**
+     * Transforms text in order to normalize
+     *
+     *  - trims text
+     *  - removes double spaces
+     *  - normalizes line break symbols
+     *
+     * @param string $text
+     * @return string
+     */
     public function normalize($text)
     {
-        $text = trim($text);
-        $text = preg_replace('/[ \t]+/', ' ', $text);
-        $text = str_replace("\r\n", "\n", $text);
-        $text = str_replace("\r", "\n", $text);
-        $text = preg_replace('/[\n]{2,}/', "\n\n", $text);
-        $text = preg_replace('/ \n/', "\n", $text);
-        $text = preg_replace('/\n /', "\n", $text);
+        $text = preg_replace('/[ \t]+/', ' ', trim($text));
+        $text = str_replace("\r\n", self::BREAK_LINE, $text);
+        $text = str_replace("\r", self::BREAK_LINE, $text);
+        $text = preg_replace('/[\n]{2,}/', self::BREAK_PARAGRAPH, $text);
+        $text = preg_replace('/ ?\n ?/', self::BREAK_LINE, $text);
 
         return $text;
     }
 
-    public function render($text)
+    /**
+     * Renders inML into HTML
+     *
+     * @param string $inml
+     * @return string
+     */
+    public function render($inml)
     {
-        $text = $this->normalize($text);
+        $html = '';
 
-        return $this->doRender($text);
+        $normalized = $this->normalize($inml);
+        if (strlen($normalized)) {
+            $structure = $this->splitText($normalized);
+            $html = $this->renderParagraphs($structure);
+        }
+
+        return $html;
     }
 
-    private function doRender($text)
+    /**
+     * Splits text into array of paragraphs, lines and words
+     *
+     * @param string $text
+     * @return array
+     */
+    private function splitText($text)
+    {
+        $paragraphs = explode(self::BREAK_PARAGRAPH, $text);
+        foreach ($paragraphs as &$paragraph) {
+            $lines = explode(self::BREAK_LINE, $paragraph);
+            foreach ($lines as &$line) {
+                $line = explode(' ', $line);
+            }
+            unset($line);
+            $paragraph = $lines;
+        }
+        unset($paragraph);
+
+        return $paragraphs;
+    }
+
+    private function renderParagraphs($paragraphs)
     {
         $out = '';
-
-        if (!strlen($text)) {
-            return '<p></p>';
-        }
-
-        $paragraphs = explode("\n\n", $text);
-        foreach ($paragraphs as &$item) {
-            $lines = explode("\n", $item);
-            foreach ($lines as &$item2) {
-                $item2 = explode(' ', $item2);
-            }
-            unset($item2);
-            $item = $lines;
-        }
-        unset($item);
 
         foreach ($paragraphs as $item) {
             if (count($item[0]) == 1 && $item[0][0][0] == '.') {

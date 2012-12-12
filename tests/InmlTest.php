@@ -49,6 +49,7 @@ class InmlTest extends PHPUnit_Framework_TestCase
     public function dataProviderTestParagraphs()
     {
         return [
+            ["", ''],
             ["line", '<p>line</p>'],
             ["line1\nline2", '<p>line1 line2</p>'],
             ["line1\n\nline2", '<p>line1</p><p>line2</p>'],
