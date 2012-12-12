@@ -50,6 +50,7 @@ class InmlTest extends PHPUnit_Framework_TestCase
     {
         return [
             ["line", 'line'],
+            ["line1\nline2", 'line'],
         ];
     }
 
