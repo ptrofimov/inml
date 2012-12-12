@@ -30,3 +30,29 @@ into HTML paragraphs with class:
 ```html
 <p class="style">Paragraph.</p>
 ```
+
+-3. Transforms lines with style:
+
+```text
+.style Line
+OR
+Line .style
+```
+
+into HTML spans with class:
+
+```html
+<span class="style">Line</span>
+```
+
+-4. Transforms words with style:
+
+```text
+word.style
+```
+
+into HTML spans with class:
+
+```html
+<span class="style">word</span>
+```
