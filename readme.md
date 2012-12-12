@@ -56,3 +56,19 @@ into HTML spans with class:
 ```html
 <span class="style">word</span>
 ```
+
+## Example
+
+inML-formatted text:
+
+```text
+```
+
+transforms into HTML:
+
+```html
+```
+
+and looks like this:
+
+![Example inML to HTML transformation](https://raw.github.com/ptrofimov/inml/master/examples/example.png)
