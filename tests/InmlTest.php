@@ -16,15 +16,26 @@ class InmlTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Inml', $this->me);
     }
 
-    public function dataProviderTestRender()
+    public function dataProviderTestNormalize()
     {
         return [
             ['', ''],
+            [' ', ' '],
+            ['  ', ' '],
+            ["\t", ' '],
+            ["\t\t", ' '],
+            [" \t ", ' '],
+            ["\n", "\n"],
+            ["\n\n", "\n\n"],
+            ["\r", "\n"],
+            ["\r\r", "\n\n"],
+            ["\r\n", "\n"],
+            ["\r\n\r\n", "\n\n"],
         ];
     }
 
     /**
-     * @dataProvider dataProviderTestRender
+     * @dataProvider dataProviderTestNormalize
      */
     public function testRender($inml, $html)
     {
