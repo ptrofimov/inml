@@ -42,8 +42,8 @@ class Inml
 
         $normalized = $this->normalize($inml);
         if (strlen($normalized)) {
-            $structure = $this->splitText($normalized);
-            $html = $this->renderParagraphs($structure);
+            $paragraphs = $this->splitText($normalized);
+            $html = $this->renderParagraphs($paragraphs);
         }
 
         return $html;
@@ -71,44 +71,73 @@ class Inml
         return $paragraphs;
     }
 
+    /**
+     * Renders array of paragraphs into HTML
+     *
+     * @param array $paragraphs
+     * @return string
+     */
     private function renderParagraphs($paragraphs)
     {
-        $out = '';
+        $html = '';
 
         foreach ($paragraphs as $item) {
             if (count($item[0]) == 1 && $item[0][0][0] == '.') {
                 $class = substr($item[0][0], 1);
-                $out .= "<p class=\"$class\">";
+                $html .= "<p class=\"$class\">";
                 array_shift($item);
-            } else $out .= '<p>';
+            } else $html .= '<p>';
 
-            foreach ($item as &$item2) {
-                foreach ($item2 as &$item3) {
-                    $parts = explode('.', $item3);
-                    if (count($parts) == 2 && strlen($parts[0]) && strlen($parts[1])) {
-                        $item3 = "<span class=\"{$parts[1]}\">{$parts[0]}</span>";
-                    }
-                }
-                unset($item3);
-
-                if ($item2[0][0] == '.') {
-                    $class = substr($item2[0], 1);
-                    array_shift($item2);
-                    $item2 = "<span class=\"$class\">" . implode(' ', $item2) . '</span>';
-                } elseif ($item2[count($item2) - 1][0] == '.') {
-                    $class = substr($item2[count($item2) - 1], 1);
-                    array_pop($item2);
-                    $item2 = "<span class=\"$class\">" . implode(' ', $item2) . '</span>';
-                } else {
-                    $item2 = implode(' ', $item2);
-                }
-            }
-            unset($item2);
-
-            $out .= implode(' ', $item);
-            $out .= '</p>';
+            $html .= $this->renderLines($item) . '</p>';
         }
 
-        return $out;
+        return $html;
+    }
+
+    /**
+     * Renders array of lines into HTML
+     *
+     * @param array $lines
+     * @return string
+     */
+    private function renderLines($lines)
+    {
+        foreach ($lines as &$item2) {
+            $item2 = $this->renderWords($item2);
+
+            if ($item2[0][0] == '.') {
+                $class = substr($item2[0], 1);
+                array_shift($item2);
+                $item2 = "<span class=\"$class\">" . implode(' ', $item2) . '</span>';
+            } elseif ($item2[count($item2) - 1][0] == '.') {
+                $class = substr($item2[count($item2) - 1], 1);
+                array_pop($item2);
+                $item2 = "<span class=\"$class\">" . implode(' ', $item2) . '</span>';
+            } else {
+                $item2 = implode(' ', $item2);
+            }
+        }
+        unset($item2);
+
+        return implode(' ', $lines);
+    }
+
+    /**
+     * Renders array of words into array of HTML words
+     *
+     * @param array $words
+     * @return array
+     */
+    private function renderWords($words)
+    {
+        foreach ($words as &$item3) {
+            $parts = explode('.', $item3);
+            if (count($parts) == 2 && strlen($parts[0]) && strlen($parts[1])) {
+                $item3 = "<span class=\"{$parts[1]}\">{$parts[0]}</span>";
+            }
+        }
+        unset($item3);
+
+        return $words;
     }
 }
