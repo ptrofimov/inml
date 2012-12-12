@@ -1,9 +1,10 @@
-.h Example header
+.h1 inML - inline markup language
 
-.p
-Example paragraph with bold.b word in sentence.
+.i inML.b is simple and compact markup that could be easily transformed into HTML.b
+
+.b Key points:
 
 .ul
-.li Item 1
-.li Item 2
-.li Item 3
+.li Easy text formatting
+.li Traditional embedded HTML.b styles
+.li Ability to add user styles

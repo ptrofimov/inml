@@ -1,1 +1,23 @@
-<p><span class="h">Example header</span></p><p class="p">Example paragraph with <span class="b">bold</span> word in sentence.</p><p class="ul"><span class="li">Item 1</span> <span class="li">Item 2</span> <span class="li">Item 3</span></p>
+<style>.h1 {
+    display: block;
+    font-size: 16pt;
+    font-weight: bold;
+}
+
+.i {
+    font-style: italic;
+}
+
+.b {
+    font-weight: bold;
+}
+
+.li {
+    display: list-item;
+}
+
+.li:before {
+    content: '* ';
+}
+</style>
+<p><span class="h1">inML - inline markup language</span></p><p><span class="i"><span class="b">inML</span> is simple and compact markup that could be easily transformed into <span class="b">HTML</span></span></p><p><span class="b">Key points:</span></p><p class="ul"><span class="li">Easy text formatting</span> <span class="li">Traditional embedded <span class="b">HTML</span> styles</span> <span class="li">Ability to add user styles</span></p>
