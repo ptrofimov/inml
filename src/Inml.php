@@ -71,9 +71,7 @@ class Inml
             unset($item2);
 
             $out .= implode(' ', $item);
-
             $out .= '</p>';
-
         }
 
         return $out;
