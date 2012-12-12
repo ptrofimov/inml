@@ -1,13 +1,6 @@
 <?php
 class Inml
 {
-    public function render($text)
-    {
-        $text = $this->normalize($text);
-
-        return $this->doRender($text);
-    }
-
     public function normalize($text)
     {
         $text = trim($text);
@@ -19,6 +12,13 @@ class Inml
         $text = preg_replace('/\n /', "\n", $text);
 
         return $text;
+    }
+
+    public function render($text)
+    {
+        $text = $this->normalize($text);
+
+        return $this->doRender($text);
     }
 
     private function doRender($text)

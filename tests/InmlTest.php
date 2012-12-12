@@ -1,5 +1,5 @@
 <?php
-require_once(dirname(__DIR__) . '/src/Inml.php');
+require_once(dirname(__DIR__) . '/classes/Inml.php');
 
 class InmlTest extends PHPUnit_Framework_TestCase
 {
