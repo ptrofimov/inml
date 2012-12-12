@@ -8,7 +8,7 @@ class Inml
         return $this->doRender($text);
     }
 
-    private function normalize($text)
+    public function normalize($text)
     {
         $text = trim($text);
         $text = preg_replace('/[ \t]+/', ' ', $text);
@@ -25,21 +25,25 @@ class Inml
     {
         $out = '';
 
+        if (!strlen($text)) {
+            return '<p></p>';
+        }
+
         $paragraphs = explode("\n\n", $text);
         foreach ($paragraphs as &$item) {
             $lines = explode("\n", $item);
             foreach ($lines as &$item2) {
                 $item2 = explode(' ', $item2);
             }
+            unset($item2);
             $item = $lines;
         }
         unset($item);
 
-
         foreach ($paragraphs as $item) {
             if (count($item[0]) == 1 && $item[0][0][0] == '.') {
                 $class = substr($item[0][0], 1);
-                $out .= "<p class='$class'>";
+                $out .= "<p class=\"$class\">";
                 array_shift($item);
             } else $out .= '<p>';
 
@@ -47,7 +51,7 @@ class Inml
                 foreach ($item2 as &$item3) {
                     $parts = explode('.', $item3);
                     if (count($parts) == 2 && strlen($parts[0]) && strlen($parts[1])) {
-                        $item3 = "<span class='{$parts[1]}'>{$parts[0]}</span>";
+                        $item3 = "<span class=\"{$parts[1]}\">{$parts[0]}</span>";
                     }
                 }
                 unset($item3);
@@ -55,11 +59,11 @@ class Inml
                 if ($item2[0][0] == '.') {
                     $class = substr($item2[0], 1);
                     array_shift($item2);
-                    $item2 = "<span class='$class'>" . implode(' ', $item2) . '</span>';
+                    $item2 = "<span class=\"$class\">" . implode(' ', $item2) . '</span>';
                 } elseif ($item2[count($item2) - 1][0] == '.') {
                     $class = substr($item2[count($item2) - 1], 1);
                     array_pop($item2);
-                    $item2 = "<span class='$class'>" . implode(' ', $item2) . '</span>';
+                    $item2 = "<span class=\"$class\">" . implode(' ', $item2) . '</span>';
                 } else {
                     $item2 = implode(' ', $item2);
                 }
@@ -70,7 +74,8 @@ class Inml
 
             $out .= '</p>';
 
-            return $out;
         }
+
+        return $out;
     }
 }

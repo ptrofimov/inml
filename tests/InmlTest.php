@@ -41,24 +41,27 @@ class InmlTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider dataProviderTestNormalize
      */
-    public function testNormalize($inml, $html)
+    public function testNormalize($in, $out)
     {
-        $this->assertSame($html, $this->me->render($inml));
+        $this->assertSame($out, $this->me->normalize($in));
     }
 
     public function dataProviderParagraphs()
     {
         return [
-            ["line", 'line'],
-            ["line1\nline2", 'line'],
+            ["line", '<p>line</p>'],
+            ["line1\nline2", '<p>line1 line2</p>'],
+            ["line1\n\nline2", '<p>line1</p><p>line2</p>'],
+            [".style1\nline1\n\n.style2\nline2",
+                '<p class="style1">line1</p><p class="style2">line2</p>'],
         ];
     }
 
     /**
      * @dataProvider dataProviderParagraphs
      */
-    public function testParagraphs($inml, $html)
+    public function testParagraphs($in, $out)
     {
-        $this->assertSame($html, $this->me->render($inml));
+        $this->assertSame($out, $this->me->render($in));
     }
 }
