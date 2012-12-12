@@ -1,6 +1,11 @@
 <?php
 require_once(dirname(__DIR__) . '/classes/Inml.php');
 
+/**
+ * Unit-tests for Inml class
+ *
+ * @author Petr Trofimov <petrofimov@yandex.ru>
+ */
 class InmlTest extends PHPUnit_Framework_TestCase
 {
     /** @var Inml */

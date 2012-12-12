@@ -1,4 +1,9 @@
 <?php
+/**
+ * Example script to demonstrate the usage of Inml class
+ *
+ * @author Petr Trofimov <petrofimov@yandex.ru>
+ */
 require_once(dirname(__DIR__) . '/classes/Inml.php');
 
 $inml = file_get_contents(__DIR__ . '/example.inml');
