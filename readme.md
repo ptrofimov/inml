@@ -1,4 +1,4 @@
-# InML - inline markup language
+# inML - inline markup language
 
 *PHP-written script in order to tranform inML-formatted text into HTML.*
 
