@@ -88,11 +88,11 @@ transforms into HTML:
 </p>
 <p class="ul">
     <span class="li">Easy text formatting</span>
-    <span class="li">Traditional embedded <span class="b">HTML</span> styles</span>
+    <span class="li">Traditional predefined <span class="b">HTML</span> styles</span>
     <span class="li">Ability to add user styles</span>
 </p>
 ```
 
-and looks like this:
+and looks like this (with predefined CSS styles):
 
 ![Example inML to HTML transformation](https://raw.github.com/ptrofimov/inml/master/examples/example.png)
