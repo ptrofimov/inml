@@ -46,7 +46,7 @@ class InmlTest extends PHPUnit_Framework_TestCase
         $this->assertSame($out, $this->me->normalize($in));
     }
 
-    public function dataProviderParagraphs()
+    public function dataProviderTestParagraphs()
     {
         return [
             ["line", '<p>line</p>'],
@@ -58,9 +58,26 @@ class InmlTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider dataProviderParagraphs
+     * @dataProvider dataProviderTestParagraphs
      */
     public function testParagraphs($in, $out)
+    {
+        $this->assertSame($out, $this->me->render($in));
+    }
+
+    public function dataProviderLines()
+    {
+        return [
+            ["line", '<p>line</p>'],
+            [".style line", '<p><span class="style">line</span></p>'],
+            ["line .style", '<p><span class="style">line</span></p>'],
+        ];
+    }
+
+    /**
+     * @dataProvider dataProviderLines
+     */
+    public function testLines($in, $out)
     {
         $this->assertSame($out, $this->me->render($in));
     }
