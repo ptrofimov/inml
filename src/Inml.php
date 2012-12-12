@@ -10,10 +10,13 @@ class Inml
 
     private function normalize($text)
     {
+        $text = trim($text);
         $text = preg_replace('/[ \t]+/', ' ', $text);
         $text = str_replace("\r\n", "\n", $text);
         $text = str_replace("\r", "\n", $text);
         $text = preg_replace('/[\n]{2,}/', "\n\n", $text);
+        $text = preg_replace('/ \n/', "\n", $text);
+        $text = preg_replace('/\n /', "\n", $text);
 
         return $text;
     }

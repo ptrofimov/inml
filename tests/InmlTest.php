@@ -20,24 +20,43 @@ class InmlTest extends PHPUnit_Framework_TestCase
     {
         return [
             ['', ''],
-            [' ', ' '],
-            ['  ', ' '],
-            ["\t", ' '],
-            ["\t\t", ' '],
-            [" \t ", ' '],
-            ["\n", "\n"],
-            ["\n\n", "\n\n"],
-            ["\r", "\n"],
-            ["\r\r", "\n\n"],
-            ["\r\n", "\n"],
-            ["\r\n\r\n", "\n\n"],
+            [' ', ''],
+            ['a b', 'a b'],
+            ['a  b', 'a b'],
+            ["a\tb", 'a b'],
+            ["a\t\tb", 'a b'],
+            ["a \t b", 'a b'],
+            ["a\nb", "a\nb"],
+            ["a\n\nb", "a\n\nb"],
+            ["a\rb", "a\nb"],
+            ["a\r\rb", "a\n\nb"],
+            ["a\r\nb", "a\nb"],
+            ["a\r\n\r\nb", "a\n\nb"],
+            ["a\n b", "a\nb"],
+            ["a \nb", "a\nb"],
+            [" a ", "a"],
         ];
     }
 
     /**
      * @dataProvider dataProviderTestNormalize
      */
-    public function testRender($inml, $html)
+    public function testNormalize($inml, $html)
+    {
+        $this->assertSame($html, $this->me->render($inml));
+    }
+
+    public function dataProviderParagraphs()
+    {
+        return [
+            ["line", 'line'],
+        ];
+    }
+
+    /**
+     * @dataProvider dataProviderParagraphs
+     */
+    public function testParagraphs($inml, $html)
     {
         $this->assertSame($html, $this->me->render($inml));
     }
