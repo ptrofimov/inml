@@ -7,51 +7,36 @@
 * 1. Transforms paragraphs into HTML paragraphs:
 
 ```html
-                 <p>
-Paragraph1.          Paragraph1.
-             =>  </p>
-Paragraph2.      <p>
-                     Paragraph2
-                 </p>
+                   <p>
+Paragraph1.            Paragraph1.
+              =>   </p>
+Paragraph2.        <p>
+                       Paragraph2.
+                   </p>
 ```
 
--2. Transforms paragraph with style:
-
-```text
-.style
-Paragraph.
-```
-
-into HTML paragraphs with class:
+* 2. Transforms paragraph with style into HTML paragraphs with class:
 
 ```html
-<p class="style">Paragraph.</p>
+.style            <p class="style">
+Paragraph.   =>       Paragraph.
+                  </p>
 ```
 
--3. Transforms lines with style:
-
-```text
-.style Line
-OR
-Line .style
-```
-
-into HTML spans with class:
+* 3. Transforms lines with style into HTML spans with class:
 
 ```html
-<span class="style">Line</span>
+.style Line        <span class="style">
+OR            =>       Line
+Line .style        </span>
 ```
 
--4. Transforms words with style:
-
-```text
-word.style
-```
-
-into HTML spans with class:
+* 4. Transforms words with style into HTML spans with class:
 
 ```html
-<span class="style">word</span>
+                  <span class="style">
+word.style   =>       word
+                  </span>
 ```
 
 ## Example
