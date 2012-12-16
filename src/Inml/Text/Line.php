@@ -47,6 +47,26 @@ class Line implements \Countable, \IteratorAggregate
     }
 
     /**
+     * Returns array of styles
+     *
+     * @return string[]
+     */
+    public function getStyles()
+    {
+        return $this->styles;
+    }
+
+    /**
+     * True is line consists no words and has styles
+     *
+     * @return bool
+     */
+    public function isStyle()
+    {
+        return !count($this->words) && !empty($this->styles);
+    }
+
+    /**
      * Implementation of \IteratorAggregate interface
      *
      * @return \ArrayObject

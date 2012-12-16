@@ -40,7 +40,9 @@ class LineTest extends \PHPUnit_Framework_TestCase
             $this->assertInstanceOf('\Inml\Text\Word', $word);
             $array[] = $word->getWord();
         }
-
         $this->assertSame($words, $array);
+
+        $this->assertSame($getStyles, $line->getStyles());
+        $this->assertSame($isStyle, $line->isStyle());
     }
 }
