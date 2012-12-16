@@ -46,4 +46,25 @@ class LineTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($isStyle, $line->isStyle());
         $this->assertSame($hasStyles, $line->hasStyles());
     }
+//
+//    public function dataProviderTestDefine()
+//    {
+//        return [
+//            ['', false, []],
+//            ['#key', false, []],
+//            ['value', false, []],
+//            ['#key value', true, ['key' => 'value']],
+//        ];
+//    }
+//
+//    /**
+//     * @dataProvider dataProviderTestDefine
+//     */
+//    public function testDefine($string, $isDefine, array $getDefine)
+//    {
+//        $line = new Line($string);
+//
+//        $this->assertSame($isDefine, $line->isDefine());
+//        $this->assertSame($getDefine, $line->getDefine());
+//    }
 }

@@ -14,6 +14,11 @@ class Word
     const CHAR_STYLE = '.';
 
     /**
+     * Delimiter char for define expression
+     */
+    const CHAR_DEFINE = '#';
+
+    /**
      * Word
      *
      * @var string
@@ -87,5 +92,31 @@ class Word
     public function isStyle()
     {
         return !$this->hasWord() && $this->hasStyles();
+    }
+
+    /**
+     * True if word is not empty and starts with # char
+     *
+     * @return bool
+     */
+    public function isDefine()
+    {
+        return strlen($this->word) >= 2
+            && substr($this->word, 0, 1) == self::CHAR_DEFINE;
+    }
+
+    /**
+     * Returns key of define word
+     *
+     * @return null|string
+     */
+    public function getDefineKey()
+    {
+        $key = null;
+        if ($this->isDefine()) {
+            $key = substr($this->word, 1);
+        }
+
+        return $key;
     }
 }

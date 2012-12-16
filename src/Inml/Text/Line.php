@@ -14,6 +14,11 @@ class Line implements \Countable, \IteratorAggregate
     const CHAR_WORD = ' ';
 
     /**
+     * Delimiter char for define expression
+     */
+    const CHAR_DEFINE = '#';
+
+    /**
      * Array of Word objects
      *
      * @var Word[]
@@ -26,6 +31,13 @@ class Line implements \Countable, \IteratorAggregate
      * @var string[]
      */
     private $styles = [];
+
+    /**
+     * Define string
+     *
+     * @var array
+     */
+    private $define = [];
 
     /**
      * Constructor
@@ -44,6 +56,8 @@ class Line implements \Countable, \IteratorAggregate
                 $this->words[] = $word;
             }
         }
+        //count($this->words) == 2
+        //    && substr($this->words[0], 0, 1) == self::CHAR_DEFINE;
     }
 
     /**
@@ -95,4 +109,15 @@ class Line implements \Countable, \IteratorAggregate
     {
         return count($this->words);
     }
+
+    /*public function isDefine()
+    {
+        return count($this->words) == 2
+            && substr($this->words[0], 0, 1) == self::CHAR_DEFINE;
+    }
+
+    public function getDefine()
+    {
+
+    }*/
 }

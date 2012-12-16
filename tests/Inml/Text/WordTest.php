@@ -35,4 +35,24 @@ class WordTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($hasStyles, $word->hasStyles());
         $this->assertSame($isStyle, $word->isStyle());
     }
+
+    public function dataProviderTestDefine()
+    {
+        return [
+            ['', false, null],
+            ['key', false, null],
+            ['#key', true, 'key'],
+        ];
+    }
+
+    /**
+     * @dataProvider dataProviderTestDefine
+     */
+    public function testDefine($string, $isDefine, $getDefineKey)
+    {
+        $word = new Word($string);
+
+        $this->assertSame($isDefine, $word->isDefine());
+        $this->assertSame($getDefineKey, $word->getDefineKey());
+    }
 }
