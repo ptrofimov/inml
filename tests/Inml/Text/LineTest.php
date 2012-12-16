@@ -8,7 +8,7 @@ class LineTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('\Inml\Text\Line', new Line('test'));
     }
 
-    public function dataProviderTestWords()
+    public function dataProviderTestParse()
     {
         return [
             ['', 0, [], [], false],
@@ -26,9 +26,9 @@ class LineTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider dataProviderTestWords
+     * @dataProvider dataProviderTestParse
      */
-    public function testWords($string, $count, array $words,
+    public function testParse($string, $count, array $words,
                               array $getStyles, $isStyle)
     {
         $line = new Line($string);
