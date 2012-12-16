@@ -2,6 +2,8 @@
 namespace Inml;
 
 use \Inml\Text\Paragraph;
+use \Inml\Text\Line;
+use \Inml\Text\Word;
 
 /**
  * Class to store array of Paragraph objects
@@ -29,13 +31,35 @@ class Text implements \Countable, \IteratorAggregate
      */
     public function __construct($string)
     {
-        $parts = explode(self::CHAR_PARAGRAPH, $string);
+        $parts = explode(self::CHAR_PARAGRAPH,
+            $this->normalize($string));
         foreach ($parts as $item) {
             $paragraph = new Paragraph($item);
             if (count($paragraph)) {
                 $this->paragraphs[] = $paragraph;
             }
         }
+    }
+
+    /**
+     * Transforms text in order to normalize
+     *
+     *  - trims text
+     *  - removes double spaces
+     *  - normalizes line break symbols
+     *
+     * @param string $text
+     * @return string
+     */
+    public function normalize($text)
+    {
+        $text = preg_replace('/[ \t]+/', ' ', trim($text));
+        $text = str_replace("\r\n", Paragraph::CHAR_LINE, $text);
+        $text = str_replace("\r", Paragraph::CHAR_LINE, $text);
+        $text = preg_replace('/[\n]{2,}/', self::CHAR_PARAGRAPH, $text);
+        $text = preg_replace('/ ?\n ?/', Paragraph::CHAR_LINE, $text);
+
+        return $text;
     }
 
     /**
