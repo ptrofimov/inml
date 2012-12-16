@@ -11,17 +11,17 @@ class LineTest extends \PHPUnit_Framework_TestCase
     public function dataProviderTestParse()
     {
         return [
-            ['', 0, [], [], false],
-            ['word', 1, ['word'], [], false],
-            ['word1 word2', 2, ['word1', 'word2'], [], false],
-            ['.style', 0, [], ['style'], true],
-            ['.style1.style2', 0, [], ['style1', 'style2'], true],
-            ['.style word', 1, ['word'], ['style'], false],
-            ['word .style', 1, ['word'], ['style'], false],
+            ['', 0, [], [], false, false],
+            ['word', 1, ['word'], [], false, false],
+            ['word1 word2', 2, ['word1', 'word2'], [], false, false],
+            ['.style', 0, [], ['style'], true, true],
+            ['.style1.style2', 0, [], ['style1', 'style2'], true, true],
+            ['.style word', 1, ['word'], ['style'], false, true],
+            ['word .style', 1, ['word'], ['style'], false, true],
             ['.style1.style2 word', 1, ['word'],
-                ['style1', 'style2'], false],
+                ['style1', 'style2'], false, true],
             ['word .style1.style2', 1, ['word'],
-                ['style1', 'style2'], false],
+                ['style1', 'style2'], false, true],
         ];
     }
 
@@ -29,7 +29,7 @@ class LineTest extends \PHPUnit_Framework_TestCase
      * @dataProvider dataProviderTestParse
      */
     public function testParse($string, $count, array $words,
-                              array $getStyles, $isStyle)
+                              array $getStyles, $isStyle, $hasStyles)
     {
         $line = new Line($string);
 
@@ -44,5 +44,6 @@ class LineTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame($getStyles, $line->getStyles());
         $this->assertSame($isStyle, $line->isStyle());
+        $this->assertSame($hasStyles, $line->hasStyles());
     }
 }

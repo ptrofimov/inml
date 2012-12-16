@@ -67,6 +67,16 @@ class Line implements \Countable, \IteratorAggregate
     }
 
     /**
+     * True if there are styles
+     *
+     * @return bool
+     */
+    public function hasStyles()
+    {
+        return !empty($this->styles);
+    }
+
+    /**
      * Implementation of \IteratorAggregate interface
      *
      * @return \ArrayObject
