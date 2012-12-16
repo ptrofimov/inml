@@ -6,8 +6,9 @@
  */
 class Inml
 {
-    const BREAK_LINE = "\n";
     const BREAK_PARAGRAPH = "\n\n";
+    const BREAK_LINE = "\n";
+    const BREAK_WORD = " ";
 
     /**
      * Transforms text in order to normalize
@@ -58,15 +59,13 @@ class Inml
     private function splitText($text)
     {
         $paragraphs = explode(self::BREAK_PARAGRAPH, $text);
-        foreach ($paragraphs as &$paragraph) {
-            $lines = explode(self::BREAK_LINE, $paragraph);
-            foreach ($lines as &$line) {
-                $line = explode(' ', $line);
+        for ($i = 0, $il = count($paragraphs); $i < $il; $i++) {
+            $lines = explode(self::BREAK_LINE, $paragraphs[$i]);
+            for ($j = 0, $jl = count($lines); $j < $jl; $j++) {
+                $lines[$j] = explode(self::BREAK_WORD, $lines[$j]);
             }
-            unset($line);
-            $paragraph = $lines;
+            $paragraphs[$i] = $lines;
         }
-        unset($paragraph);
 
         return $paragraphs;
     }
