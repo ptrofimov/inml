@@ -119,4 +119,15 @@ class Word
 
         return $key;
     }
+
+
+    /**
+     * True if word is valid URL
+     *
+     * @return bool
+     */
+    public function isUrl()
+    {
+        return (bool) filter_var($this->word, FILTER_VALIDATE_URL);
+    }
 }
