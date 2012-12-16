@@ -76,4 +76,22 @@ class WordTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertSame($isUrl, (new Word($string))->isUrl());
     }
+
+    public function dataProviderTestIsEmail()
+    {
+        return [
+            ['', false],
+            ['link', false],
+            ['domain.com', false],
+            ['email@domain.com', true],
+        ];
+    }
+
+    /**
+     * @dataProvider dataProviderTestIsEmail
+     */
+    public function testIsEmail($string, $isEmail)
+    {
+        $this->assertSame($isEmail, (new Word($string))->isEmail());
+    }
 }

@@ -120,7 +120,6 @@ class Word
         return $key;
     }
 
-
     /**
      * True if word is valid URL
      *
@@ -128,6 +127,17 @@ class Word
      */
     public function isUrl()
     {
-        return (bool) filter_var($this->word, FILTER_VALIDATE_URL);
+        return (bool) filter_var($word = $this->word, FILTER_VALIDATE_URL);
+    }
+
+    /**
+     * True if word is valid e-mail
+     *
+     * @return bool
+     */
+    public function isEmail()
+    {
+        $word = $this->word;var_dump($word);
+        return (bool) filter_var($word, FILTER_VALIDATE_EMAIL);
     }
 }
