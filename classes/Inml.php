@@ -9,6 +9,7 @@ class Inml
     const BREAK_PARAGRAPH = "\n\n";
     const BREAK_LINE = "\n";
     const BREAK_WORD = " ";
+    const BREAK_STYLE = ".";
 
     /**
      * Transforms text in order to normalize
@@ -70,6 +71,31 @@ class Inml
         return $paragraphs;
     }
 
+    private function getStyles($string)
+    {
+        $styles = [];
+
+        if ($string) {
+            $parts = explode(self::BREAK_STYLE, $string);
+            if (count($parts) > 1 && !strlen($parts[0])) {
+                $styles = array_slice($parts, 1);
+            }
+        }
+
+        return $styles;
+    }
+
+    private function isParagraphStyle(array $line)
+    {
+        return count($line) == 1
+            && substr($line[0], 0, 1) == self::BREAK_STYLE;
+    }
+
+    private function getStylesAsString($string)
+    {
+        return implode(' ', $this->getStyles($string));
+    }
+
     /**
      * Renders array of paragraphs into HTML
      *
@@ -81,8 +107,8 @@ class Inml
         $html = '';
 
         foreach ($paragraphs as $item) {
-            if (count($item[0]) == 1 && $item[0][0][0] == '.') {
-                $class = substr($item[0][0], 1);
+            if ($this->isParagraphStyle($item[0])) {
+                $class = $this->getStylesAsString($item[0][0]);
                 $html .= "<p class=\"$class\">";
                 array_shift($item);
             } else $html .= '<p>';

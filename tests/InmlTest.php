@@ -60,6 +60,8 @@ class InmlTest extends PHPUnit_Framework_TestCase
             ["line1\n\nline2", '<p>line1</p><p>line2</p>'],
             [".style1\nline1\n\n.style2\nline2",
                 '<p class="style1">line1</p><p class="style2">line2</p>'],
+            [".style1.style2\nline1",
+                '<p class="style1 style2">line1</p>'],
         ];
     }
 
