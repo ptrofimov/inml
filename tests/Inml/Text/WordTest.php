@@ -24,7 +24,7 @@ class WordTest extends \PHPUnit_Framework_TestCase
      * @dataProvider dataProviderTestParse
      */
     public function testParse($string, $getWord,
-                              $getStyles, $hasWord,
+                              array $getStyles, $hasWord,
                               $hasStyles, $isStyle)
     {
         $word = new Word($string);
