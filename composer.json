@@ -1,13 +1,18 @@
 {
-    "name": "ptrofimov/inml",
-    "description": "inML - inline markup language",
-    "authors": [
+    "name":"ptrofimov/inml",
+    "description":"inML - inline markup language",
+    "authors":[
         {
-            "name": "Petr Trofimov",
-            "email": "petrofimov@yandex.ru"
+            "name":"Petr Trofimov",
+            "email":"petrofimov@yandex.ru"
         }
     ],
-    "require": {
+    "require":{
 
+    },
+    "autoload":{
+        "psr-0":{
+            "Inml":"src/"
+        }
     }
 }
