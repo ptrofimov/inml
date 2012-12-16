@@ -78,4 +78,14 @@ class Word
     {
         return (bool) count($this->styles);
     }
+
+    /**
+     * True if there are styles and no word
+     *
+     * @return bool
+     */
+    public function isStyle()
+    {
+        return !$this->hasWord() && $this->hasStyles();
+    }
 }

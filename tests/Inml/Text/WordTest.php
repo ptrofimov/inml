@@ -11,18 +11,21 @@ class WordTest extends \PHPUnit_Framework_TestCase
     public function dataProviderTestParse()
     {
         return [
-            ['', '', [], false, false],
-            ['word', 'word', [], true, false],
-            ['.style', '', ['style'], false, true],
-            ['word.style', 'word', ['style'], true, true],
-            ['word.style1.style2', 'word', ['style1', 'style2'], true, true],
+            ['', '', [], false, false, false],
+            ['word', 'word', [], true, false, false],
+            ['.style', '', ['style'], false, true, true],
+            ['word.style', 'word', ['style'], true, true, false],
+            ['word.style1.style2', 'word',
+                ['style1', 'style2'], true, true, false],
         ];
     }
 
     /**
      * @dataProvider dataProviderTestParse
      */
-    public function testParse($string, $getWord, $getStyles, $hasWord, $hasStyles)
+    public function testParse($string, $getWord,
+                              $getStyles, $hasWord,
+                              $hasStyles, $isStyle)
     {
         $word = new Word($string);
 
@@ -30,5 +33,6 @@ class WordTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($getStyles, $word->getStyles());
         $this->assertSame($hasWord, $word->hasWord());
         $this->assertSame($hasStyles, $word->hasStyles());
+        $this->assertSame($isStyle, $word->isStyle());
     }
 }
