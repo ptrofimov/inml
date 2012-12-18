@@ -20,6 +20,7 @@ class HtmlTest extends \PHPUnit_Framework_TestCase
             ['word', [], 'word'],
             ['word', ['style'], '<span class="style">word</span>'],
             ['word', ['sty"le'], '<span class="style">word</span>'],
+            ['word', ['div', 'div'], '<div><div>word</div></div>'],
             ['word', ['style', 'style'], '<span class="style">word</span>'],
             ['word', ['style1', 'style2'],
                 '<span class="style1 style2">word</span>'],
@@ -40,6 +41,30 @@ class HtmlTest extends \PHPUnit_Framework_TestCase
     public function testWrapInTags($content, array $styles, $return)
     {
         $this->assertSame($return, $this->me->wrapInTags($content, $styles));
+    }
+
+    public function dataProviderTestDefaultTag()
+    {
+        return [
+            ['word', [], 'p', '<p>word</p>'],
+            ['word', ['style'], 'p', '<p class="style">word</p>'],
+            ['word', [], 'div', '<div>word</div>'],
+            ['word', ['style'], 'div', '<div class="style">word</div>'],
+        ];
+    }
+
+    /**
+     * @dataProvider dataProviderTestDefaultTag
+     */
+    public function testDefaultTag($content, array $styles,
+                                   $defaultTag, $return)
+    {
+        $this->assertSame(
+            $return,
+            $defaultTag ?
+                $this->me->wrapInTags($content, $styles, $defaultTag)
+                : $this->me->wrapInTags($content, $styles)
+        );
     }
 
     public function dataProviderTestParagraphs()

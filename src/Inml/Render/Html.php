@@ -68,29 +68,34 @@ class Html implements \Inml\Render
      *
      * @param string $content
      * @param array $styles
+     * @param string $defaultTag
      * @return string
      */
-    public function wrapInTags($content, array $styles)
+    public function wrapInTags($content, array $styles, $defaultTag = 'span')
     {
         $tags = [];
         $tag = null;
-        foreach (array_unique($styles) as $style) {
+        foreach ($styles as $style) {
             if (in_array($style, $this->htmlTags)) {
                 array_push($tags, $tag);
                 $tag = ['name' => $style, 'classes' => []];
             } else {
                 if (is_null($tag)) {
-                    $tag = ['name' => 'span', 'classes' => []];
+                    $tag = ['name' => $defaultTag, 'classes' => []];
                 }
                 $tag['classes'][] = str_replace('"', '', $style);
             }
+        }
+        if ($defaultTag != 'span' && is_null($tag)) {
+            $tag = ['name' => $defaultTag, 'classes' => []];
         }
         array_push($tags, $tag);
         foreach (array_reverse($tags) as $tag) {
             if (is_null($tag)) {
                 continue;
             } elseif (!empty($tag['classes'])) {
-                $classes = implode(self::CHAR_SPACE, $tag['classes']);
+                $classes = implode(self::CHAR_SPACE,
+                    array_unique($tag['classes']));
                 $open = "<$tag[name] class=\"$classes\">";
             } else {
                 $open = "<$tag[name]>";
@@ -117,7 +122,8 @@ class Html implements \Inml\Render
 
         return $this->wrapInTags(
             implode(self::CHAR_SPACE, $lines),
-            array_merge(['p'], $paragraph->getStyles())
+            $paragraph->getStyles(),
+            'p'
         );
     }
 
