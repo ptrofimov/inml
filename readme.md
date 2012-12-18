@@ -90,4 +90,4 @@ transforms into HTML:
 
 and looks like this (with predefined CSS styles):
 
-![Example inML to HTML transformation](https://raw.github.com/ptrofimov/inml/master/examples/example.png)
+![Example inML to HTML transformation](https://raw.github.com/ptrofimov/inml/master/examples/example.jpg)
