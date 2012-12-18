@@ -49,34 +49,30 @@ class Html implements \Inml\Render
      * Wraps content in tags and styles
      *
      * @param string $content
-     * @param string $tag
      * @param array $styles
      * @return string
      */
     public function wrapInTags($content, array $styles)
     {
-        $styles = array_unique($styles);
         $htmlTags = ['p', 'h1', 'b', 'i', 'ul', 'li'];
         $tags = [];
         $tag = null;
-        foreach ($styles as $item) {
-            if (in_array($item, $htmlTags)) {
-                if (!is_null($tag)) {
-                    $tags[] = $tag;
-                }
-                $tag = ['name' => $item, 'classes' => []];
+        foreach (array_unique($styles) as $style) {
+            if (in_array($style, $htmlTags)) {
+                array_push($tags, $tag);
+                $tag = ['name' => $style, 'classes' => []];
             } else {
                 if (is_null($tag)) {
                     $tag = ['name' => 'span', 'classes' => []];
                 }
-                $tag['classes'][] = $item;
+                $tag['classes'][] = $style;
             }
         }
-        if (!is_null($tag)) {
-            $tags[] = $tag;
-        }
+        array_push($tags, $tag);
         foreach (array_reverse($tags) as $tag) {
-            if (!empty($tag['classes'])) {
+            if (is_null($tag)) {
+                continue;
+            } elseif (!empty($tag['classes'])) {
                 $classes = implode(self::CHAR_SPACE, $tag['classes']);
                 $open = "<$tag[name] class=\"$classes\">";
             } else {
