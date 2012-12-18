@@ -65,7 +65,7 @@ class Html implements \Inml\Render
                 if (is_null($tag)) {
                     $tag = ['name' => 'span', 'classes' => []];
                 }
-                $tag['classes'][] = $style;
+                $tag['classes'][] = str_replace('"', '', $style);
             }
         }
         array_push($tags, $tag);

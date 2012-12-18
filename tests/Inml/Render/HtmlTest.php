@@ -19,6 +19,7 @@ class HtmlTest extends \PHPUnit_Framework_TestCase
             ['', [], ''],
             ['word', [], 'word'],
             ['word', ['style'], '<span class="style">word</span>'],
+            ['word', ['sty"le'], '<span class="style">word</span>'],
             ['word', ['style', 'style'], '<span class="style">word</span>'],
             ['word', ['style1', 'style2'],
                 '<span class="style1 style2">word</span>'],
