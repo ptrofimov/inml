@@ -60,7 +60,7 @@ class HtmlTest extends \PHPUnit_Framework_TestCase
      */
     public function testParagraphs($in, $out)
     {
-        $this->assertSame($out, (new Html())->render(new Text($in)));
+        $this->assertSame($out, $this->me->render(new Text($in)));
     }
 
     public function dataProviderTestLines()
@@ -81,7 +81,7 @@ class HtmlTest extends \PHPUnit_Framework_TestCase
      */
     public function testLines($in, $out)
     {
-        $this->assertSame($out, (new Html())->render(new Text($in)));
+        $this->assertSame($out, $this->me->render(new Text($in)));
     }
 
     public function dataProviderTestWords()
@@ -99,6 +99,6 @@ class HtmlTest extends \PHPUnit_Framework_TestCase
      */
     public function testWords($in, $out)
     {
-        $this->assertSame($out, (new Html())->render(new Text($in)));
+        $this->assertSame($out, $this->me->render(new Text($in)));
     }
 }
