@@ -19,6 +19,24 @@ class Html implements \Inml\Render
     const CHAR_SPACE = ' ';
 
     /**
+     * List of some HTML5 tags
+     *
+     * @var array
+     */
+    private $htmlTags;
+
+    public function __construct()
+    {
+        $this->htmlTags = [
+            'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
+            'p', 'hr', 'pre', 'blockquote',
+            'ol', 'ul', 'li', 'dl', 'dt', 'div',
+            'a', 'em', 'strong', 'small',
+            'i', 'b', 'u',
+        ];
+    }
+
+    /**
      * Renders Inml\Text into HTML format
      *
      * @param \Inml\Text $text Text to render
@@ -54,11 +72,10 @@ class Html implements \Inml\Render
      */
     public function wrapInTags($content, array $styles)
     {
-        $htmlTags = ['p', 'h1', 'b', 'i', 'ul', 'li'];
         $tags = [];
         $tag = null;
         foreach (array_unique($styles) as $style) {
-            if (in_array($style, $htmlTags)) {
+            if (in_array($style, $this->htmlTags)) {
                 array_push($tags, $tag);
                 $tag = ['name' => $style, 'classes' => []];
             } else {
