@@ -39,6 +39,16 @@ word.style   =>       word
                   </span>
 ```
 
+* 5. If parser finds styles equal HTML5 tags,
+it transforms them to corresponding tags (not classes):
+
+```html
+.div.style        <div class="style">
+Paragraph.   =>       Paragraph.
+                  </div>
+```
+
+
 ## Example
 
 inML-formatted text:
@@ -46,7 +56,9 @@ inML-formatted text:
 ```text
 .h1 inML - inline markup language
 
-.i inML.b is simple and compact markup that could be easily transformed into HTML.b
+.i
+inML.b is simple and compact markup
+that could be easily transformed into HTML.b
 
 .b Key points:
 
@@ -60,19 +72,20 @@ transforms into HTML:
 
 ```html
 <p>
-    <span class="h1">inML - inline markup language</span>
+    <h1>inML - inline markup language</h1>
 </p>
+<i>
+    <b>inML</b> is simple and compact markup
+        that could be easily transformed into <b>HTML</b>
+</i>
 <p>
-    <span class="i"><span class="b">inML</span> is simple and compact markup that could be easily transformed into <span class="b">HTML</span></span>
+    <b>Key points:</b>
 </p>
-<p>
-    <span class="b">Key points:</span>
-</p>
-<p class="ul">
-    <span class="li">Easy text formatting</span>
-    <span class="li">Traditional predefined <span class="b">HTML</span> styles</span>
-    <span class="li">Ability to add user styles</span>
-</p>
+<ul>
+    <li>Easy text formatting</li>
+    <li>Traditional embedded <b>HTML</b> styles</li>
+    <li>Ability to add user styles</li>
+</ul>
 ```
 
 and looks like this (with predefined CSS styles):
