@@ -1,7 +1,7 @@
 .h1 inML - inline markup language
 
 .i
-inML.b is simple and compact markup.wiki
+inML.b is simple and compact markup
 that could be easily transformed into HTML.b
 
 .b Key points:
@@ -10,6 +10,3 @@ that could be easily transformed into HTML.b
 .li Easy text formatting
 .li Traditional embedded HTML.b styles
 .li Ability to add user styles
-
-#wiki http://en.wikipedia.org/wiki/$0
-

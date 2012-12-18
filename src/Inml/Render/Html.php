@@ -148,12 +148,9 @@ class Html implements \Inml\Render
      */
     private function renderWord(Word $word)
     {
-        $out = $word->getWord();
-        if ($word->hasStyles()) {
-            $out = "<span class=\"{$this->getClass($word)}\">" .
-                $out . '</span>';
-        }
-
-        return $out;
+        return $this->wrapInTags(
+            $word->getWord(),
+            $word->getStyles()
+        );
     }
 }
