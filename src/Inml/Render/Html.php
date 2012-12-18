@@ -97,11 +97,9 @@ class Html implements \Inml\Render
         foreach ($paragraph as $line) {
             $lines[] = $this->renderLine($line);
         }
-        $out = implode(self::CHAR_SPACE, $lines);
 
-        //return $out . '</p>';
         return $this->wrapInTags(
-            $out,
+            implode(self::CHAR_SPACE, $lines),
             array_merge(['p'], $paragraph->getStyles())
         );
     }
@@ -118,13 +116,11 @@ class Html implements \Inml\Render
         foreach ($line as $word) {
             $words[] = $this->renderWord($word);
         }
-        $out = implode(self::CHAR_SPACE, $words);
-        if ($line->hasStyles()) {
-            $out = "<span class=\"{$this->getClass($line)}\">" .
-                $out . '</span>';
-        }
 
-        return $out;
+        return $this->wrapInTags(
+            implode(self::CHAR_SPACE, $words),
+            $line->getStyles()
+        );
     }
 
     /**
