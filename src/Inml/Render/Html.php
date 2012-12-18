@@ -46,6 +46,50 @@ class Html implements \Inml\Render
     }
 
     /**
+     * Wraps content in tags and styles
+     *
+     * @param string $content
+     * @param string $tag
+     * @param array $styles
+     * @return string
+     */
+    public function wrapInTags($content, array $styles)
+    {
+        $styles = array_unique($styles);
+        $htmlTags = ['p', 'h1', 'b', 'i', 'ul', 'li'];
+        $tags = [];
+        $tag = null;
+        foreach ($styles as $item) {
+            if (in_array($item, $htmlTags)) {
+                if (!is_null($tag)) {
+                    $tags[] = $tag;
+                }
+                $tag = ['name' => $item, 'classes' => []];
+            } else {
+                if (is_null($tag)) {
+                    $tag = ['name' => 'span', 'classes' => []];
+                }
+                $tag['classes'][] = $item;
+            }
+        }
+        if (!is_null($tag)) {
+            $tags[] = $tag;
+        }
+        foreach (array_reverse($tags) as $tag) {
+            if (!empty($tag['classes'])) {
+                $classes = implode(self::CHAR_SPACE, $tag['classes']);
+                $open = "<$tag[name] class=\"$classes\">";
+            } else {
+                $open = "<$tag[name]>";
+            }
+            $close = "</$tag[name]>";
+            $content = "$open$content$close";
+        }
+
+        return $content;
+    }
+
+    /**
      * Renders Paragraph object into HTML format
      *
      * @param \Inml\Text\Paragraph $paragraph
@@ -53,18 +97,17 @@ class Html implements \Inml\Render
      */
     private function renderParagraph(Paragraph $paragraph)
     {
-        if ($paragraph->hasStyles()) {
-            $out = "<p class=\"{$this->getClass($paragraph)}\">";
-        } else {
-            $out = '<p>';
-        }
         $lines = [];
         foreach ($paragraph as $line) {
             $lines[] = $this->renderLine($line);
         }
-        $out .= implode(self::CHAR_SPACE, $lines);
+        $out = implode(self::CHAR_SPACE, $lines);
 
-        return $out . '</p>';
+        //return $out . '</p>';
+        return $this->wrapInTags(
+            $out,
+            array_merge(['p'], $paragraph->getStyles())
+        );
     }
 
     /**
