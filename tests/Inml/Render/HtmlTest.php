@@ -72,7 +72,7 @@ class HtmlTest extends \PHPUnit_Framework_TestCase
         return [
             ["", ''],
             ["line", '<p>line</p>'],
-            ["line1\nline2", '<p>line1 line2</p>'],
+            ["line1\nline2", "<p>line1\nline2</p>"],
             ["line1\n\nline2", '<p>line1</p><p>line2</p>'],
             [".style1.style2\nline", '<p class="style1 style2">line</p>'],
             [".style1\nline1\n\n.style2\nline2",

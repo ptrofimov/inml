@@ -14,9 +14,14 @@ use \Inml\Text\Word;
 class Html implements \Inml\Render
 {
     /**
-     * Delimiter between classes, lines and words
+     * Delimiter between classes and words
      */
     const CHAR_SPACE = ' ';
+
+    /**
+     * Delimiter between lines
+     */
+    const CHAR_LINEBREAK = "\n";
 
     /**
      * List of some HTML5 tags
@@ -121,7 +126,7 @@ class Html implements \Inml\Render
         }
 
         return $this->wrapInTags(
-            implode(self::CHAR_SPACE, $lines),
+            implode(self::CHAR_LINEBREAK, $lines),
             $paragraph->getStyles(),
             'p'
         );
