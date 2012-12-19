@@ -40,8 +40,16 @@ class Word
     public function __construct($string)
     {
         $parts = explode(self::CHAR_STYLE, $string);
-        $this->word = $parts[0];
-        $this->styles = array_slice($parts, 1);
+        $word = $parts[0];
+        $styles = array_slice($parts, 1);
+        foreach ($styles as $style) {
+            if (is_numeric($style)) {
+                $word .= self::CHAR_STYLE . $style;
+                array_shift($styles);
+            }
+        }
+        $this->word = $word;
+        $this->styles = $styles;
     }
 
     /**
@@ -137,7 +145,8 @@ class Word
      */
     public function isEmail()
     {
-        $word = $this->word;var_dump($word);
+        $word = $this->word;
+        var_dump($word);
         return (bool) filter_var($word, FILTER_VALIDATE_EMAIL);
     }
 }

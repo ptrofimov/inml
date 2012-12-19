@@ -15,6 +15,8 @@ class WordTest extends \PHPUnit_Framework_TestCase
             ['word', 'word', [], true, false, false],
             ['.style', '', ['style'], false, true, true],
             ['word.style', 'word', ['style'], true, true, false],
+            ['12.5.style', '12.5', ['style'], true, true, false],
+            ['127.0.0.1', '127.0.0.1', [], true, false, false],
             ['word.style1.style2', 'word',
                 ['style1', 'style2'], true, true, false],
         ];
