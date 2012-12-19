@@ -30,7 +30,7 @@ class Word
      *
      * @var string[]
      */
-    private $styles;
+    private $styles = [];
 
     /**
      * Constructor
@@ -39,11 +39,19 @@ class Word
      */
     public function __construct($string)
     {
+        if (
+            strpos($string, '@') !== false
+            || strpos($string, '\\') !== false
+            || strpos($string, '/') !== false
+        ) {
+            $this->word = $string;
+            return;
+        }
         $parts = explode(self::CHAR_STYLE, $string);
         $word = $parts[0];
         $styles = array_slice($parts, 1);
         foreach ($styles as $style) {
-            if (is_numeric($style)) {
+            if (!preg_match('/^[a-zA-Z][a-zA-Z0-9]*$/', $style)) {
                 $word .= self::CHAR_STYLE . $style;
                 array_shift($styles);
             }
