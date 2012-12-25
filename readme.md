@@ -3,9 +3,9 @@
 *inML is concise and intuitive markup language. This repository contains description of inML markup language
 and PHP-written library and example script in order to render inML-formatted text into HTML and Text formats.*
 
-* [Basic inML -> HTML transformation rules](https://github.com/ptrofimov/inml/edit/master/readme.md#basic-inml---html-transformation-rules)
-* [Example with screenshots](https://github.com/ptrofimov/inml/edit/master/readme.md#example-with-screenshots)
-* [Installation and usage](https://github.com/ptrofimov/inml/edit/master/readme.md#installation-and-usage)
+* [Basic inML -> HTML transformation rules](https://github.com/ptrofimov/inml#basic-inml---html-transformation-rules)
+* [Example with screenshots](https://github.com/ptrofimov/inml#example-with-screenshots)
+* [Installation and usage](https://github.com/ptrofimov/inml#installation-and-usage)
 
 ## Basic inML -> HTML transformation rules
 
