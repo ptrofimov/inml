@@ -28,12 +28,20 @@ class Paragraph implements \Countable, \IteratorAggregate
     private $styles = [];
 
     /**
+     * Non-parsed string
+     *
+     * @var string
+     */
+    private $rawString;
+
+    /**
      * Constructor
      *
      * @param string $string String to parse
      */
     public function __construct($string)
     {
+        $this->rawString = $string;
         $parts = explode(Line::SEPARATOR, $string);
         foreach ($parts as $item) {
             $line = new Line($item);
@@ -83,6 +91,36 @@ class Paragraph implements \Countable, \IteratorAggregate
      */
     public function count()
     {
+        return $this->getCount();
+    }
+
+    /**
+     * Returns non-parsed string
+     *
+     * @return string
+     */
+    public function getRawString()
+    {
+        return $this->rawString;
+    }
+
+    /**
+     * Returns count of lines in paragraph
+     *
+     * @return int
+     */
+    public function getCount()
+    {
         return count($this->lines);
+    }
+
+    /**
+     * True if there are no lines in paragraph
+     *
+     * @return bool
+     */
+    public function isEmpty()
+    {
+        return !$this->getCount();
     }
 }

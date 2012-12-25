@@ -27,7 +27,11 @@ class ParagraphTest extends \PHPUnit_Framework_TestCase
     {
         $paragraph = new Paragraph($string);
 
+        $this->assertSame($string, $paragraph->getRawString());
+
         $this->assertSame($count, count($paragraph));
+        $this->assertSame($count, $paragraph->getCount());
+        $this->assertSame($count > 0 ? false : true, $paragraph->isEmpty());
 
         foreach ($paragraph as $line) {
             $this->assertInstanceOf('\Inml\Text\Line', $line);
