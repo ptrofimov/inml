@@ -4,6 +4,8 @@
 and PHP-written library and example script in order to render inML-formatted text into HTML and Text formats.*
 
 * [Basic inML -> HTML transformation rules](https://github.com/ptrofimov/inml/edit/master/readme.md#basic-inml---html-transformation-rules)
+* [Example](https://github.com/ptrofimov/inml/edit/master/readme.md#example)
+* [Installation](https://github.com/ptrofimov/inml/edit/master/readme.md#installation)
 
 ## Basic inML -> HTML transformation rules
 
@@ -90,3 +92,7 @@ transforms into HTML:
 and looks like this (with predefined CSS styles):
 
 ![Example inML to HTML transformation](https://raw.github.com/ptrofimov/inml/master/examples/example.jpg)
+
+## Installation
+
+* 1. Install [composer](http://getcomposer.org/download/) if need.
