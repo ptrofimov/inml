@@ -58,17 +58,6 @@ class Html implements \Inml\Render
     }
 
     /**
-     * Joins array of styles into string
-     *
-     * @param $object
-     * @return string
-     */
-    private function getClass($object)
-    {
-        return implode(self::CHAR_SPACE, $object->getStyles());
-    }
-
-    /**
      * Wraps content in tags and styles
      *
      * @param string $content
