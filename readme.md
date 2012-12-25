@@ -7,18 +7,7 @@ and PHP-written library and example script in order to render inML-formatted tex
 
 ## Basic inML -> HTML transformation rules
 
-* 1. Transforms paragraphs into HTML paragraphs:
-
-```html
-                   <p>
-Paragraph1.            Paragraph1.
-              =>   </p>
-Paragraph2.        <p>
-                       Paragraph2.
-                   </p>
-```
-
-* 2. Transforms paragraph with style into HTML paragraphs with class:
+* 1. Transforms paragraphs with style into HTML paragraphs with class:
 
 ```html
 .style            <p class="style">
@@ -26,7 +15,7 @@ Paragraph.   =>       Paragraph.
                   </p>
 ```
 
-* 3. Transforms lines with style into HTML spans with class:
+* 2. Transforms lines with style into HTML spans with class:
 
 ```html
 .style Line        <span class="style">
@@ -34,7 +23,7 @@ OR            =>       Line
 Line .style        </span>
 ```
 
-* 4. Transforms words with style into HTML spans with class:
+* 3. Transforms words with style into HTML spans with class:
 
 ```html
                   <span class="style">
@@ -42,7 +31,7 @@ word.style   =>       word
                   </span>
 ```
 
-* 5. If parser finds styles equal HTML5 tags,
+* 4. If parser finds styles equal HTML5 tags,
 it transforms them to corresponding tags (not classes):
 
 ```html
