@@ -35,6 +35,13 @@ class Paragraph implements \Countable, \IteratorAggregate
     private $rawString;
 
     /**
+     * Array of defines
+     *
+     * @var array
+     */
+    private $defines = [];
+
+    /**
      * Constructor
      *
      * @param string $string String to parse
@@ -48,7 +55,9 @@ class Paragraph implements \Countable, \IteratorAggregate
             if ($line->isStyle()) {
                 $this->styles = array_merge(
                     $this->styles, $line->getStyles());
-            } elseif (count($line)) {
+            } elseif ($line->isDefine()) {
+                $this->defines[$line->getDefineKey()] = $line->getDefineWord();
+            } elseif (!$line->isEmpty()) {
                 $this->lines[] = $line;
             }
         }
@@ -122,5 +131,15 @@ class Paragraph implements \Countable, \IteratorAggregate
     public function isEmpty()
     {
         return !$this->getCount();
+    }
+
+    /**
+     * Returns array of defines
+     *
+     * @return array
+     */
+    public function getDefines()
+    {
+        return $this->defines;
     }
 }

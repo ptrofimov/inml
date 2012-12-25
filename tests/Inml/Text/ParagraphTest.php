@@ -40,4 +40,25 @@ class ParagraphTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($getStyles, $paragraph->getStyles());
         $this->assertSame($hasStyles, $paragraph->hasStyles());
     }
+
+    public function dataProviderTestGetDefines()
+    {
+        return [
+            ["", 0, []],
+            ["#key value", 0, ['key']],
+            ["#key value\nline", 1, ['key']],
+            ["#key value\nline\n#key value", 1, ['key']],
+        ];
+    }
+
+    /**
+     * @dataProvider dataProviderTestGetDefines
+     */
+    public function testGetDefines($string, $count, array $getDefines)
+    {
+        $paragraph = new Paragraph($string);
+
+        $this->assertSame($count, $paragraph->getCount());
+        $this->assertSame($getDefines, array_keys($paragraph->getDefines()));
+    }
 }
