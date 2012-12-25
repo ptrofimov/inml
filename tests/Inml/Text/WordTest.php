@@ -34,6 +34,7 @@ class WordTest extends \PHPUnit_Framework_TestCase
     {
         $word = new Word($string);
 
+        $this->assertSame($string, $word->getRawString());
         $this->assertSame($getWord, $word->getWord());
         $this->assertSame($getStyles, $word->getStyles());
         $this->assertSame($hasWord, $word->hasWord());

@@ -33,12 +33,20 @@ class Word
     private $styles = [];
 
     /**
+     * Non-parsed string
+     *
+     * @var string
+     */
+    private $rawString;
+
+    /**
      * Constructor
      *
      * @param string $string String to parse
      */
     public function __construct($string)
     {
+        $this->rawString = $string;
         if (
             strpos($string, '@') !== false
             || strpos($string, '\\') !== false
@@ -156,5 +164,15 @@ class Word
         $word = $this->word;
         var_dump($word);
         return (bool) filter_var($word, FILTER_VALIDATE_EMAIL);
+    }
+
+    /**
+     * Returns non-parsed string
+     *
+     * @return string
+     */
+    public function getRawString()
+    {
+        return $this->rawString;
     }
 }
