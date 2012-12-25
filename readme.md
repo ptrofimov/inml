@@ -96,3 +96,29 @@ and looks like this (with predefined CSS styles):
 ## Installation
 
 * 1. Install [composer](http://getcomposer.org/download/) if need.
+* 2. Create composer.json or add dependency:
+
+```json
+{
+   "require":{
+       "ptrofimov/inml":"*"
+   }
+}
+```
+
+* 3. Install package:
+ 
+```sh
+composer install
+```
+
+* 4. Usage:
+ 
+```php
+use \Inml\Text;
+use \Inml\Render\Html;
+
+$html = (new Html)->render(new Text($inml));
+```
+
+* 5. Enjoy!
