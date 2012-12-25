@@ -14,11 +14,6 @@ class Paragraph implements \Countable, \IteratorAggregate
     const SEPARATOR = "\n\n";
 
     /**
-     * Delimiter char for lines
-     */
-    const CHAR_LINE = "\n";
-
-    /**
      * Array of Line objects
      *
      * @var Line[]
@@ -39,7 +34,7 @@ class Paragraph implements \Countable, \IteratorAggregate
      */
     public function __construct($string)
     {
-        $parts = explode(self::CHAR_LINE, $string);
+        $parts = explode(Line::SEPARATOR, $string);
         foreach ($parts as $item) {
             $line = new Line($item);
             if ($line->isStyle()) {

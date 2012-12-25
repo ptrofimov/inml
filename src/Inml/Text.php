@@ -60,10 +60,10 @@ class Text implements \Countable, \IteratorAggregate
     public function normalize($text)
     {
         $text = preg_replace('/[ \t]+/', ' ', trim($text));
-        $text = str_replace("\r\n", Paragraph::CHAR_LINE, $text);
-        $text = str_replace("\r", Paragraph::CHAR_LINE, $text);
+        $text = str_replace("\r\n", Line::SEPARATOR, $text);
+        $text = str_replace("\r", Line::SEPARATOR, $text);
         $text = preg_replace('/[\n]{2,}/', Paragraph::SEPARATOR, $text);
-        $text = preg_replace('/ ?\n ?/', Paragraph::CHAR_LINE, $text);
+        $text = preg_replace('/ ?\n ?/', Line::SEPARATOR, $text);
 
         return $text;
     }

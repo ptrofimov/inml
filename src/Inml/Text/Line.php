@@ -9,6 +9,11 @@ namespace Inml\Text;
 class Line implements \Countable, \IteratorAggregate
 {
     /**
+     * Separator char for lines
+     */
+    const SEPARATOR = "\n";
+
+    /**
      * Delimiter char for words
      */
     const CHAR_WORD = ' ';
