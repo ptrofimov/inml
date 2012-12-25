@@ -28,6 +28,13 @@ class Text implements \Countable, \IteratorAggregate
     private $rawString;
 
     /**
+     * Array of defines
+     *
+     * @var array
+     */
+    private $defines = [];
+
+    /**
      * Constructor
      *
      *  - normalizes string
@@ -41,7 +48,9 @@ class Text implements \Countable, \IteratorAggregate
         $parts = explode(Paragraph::SEPARATOR, $this->normalize($string));
         foreach ($parts as $part) {
             $paragraph = new Paragraph($part);
-            if (count($paragraph)) {
+            $this->defines = array_merge($this->defines,
+                $paragraph->getDefines());
+            if (!$paragraph->isEmpty()) {
                 $this->paragraphs[] = $paragraph;
             }
         }
@@ -116,5 +125,15 @@ class Text implements \Countable, \IteratorAggregate
     public function getRawString()
     {
         return $this->rawString;
+    }
+
+    /**
+     * Returns array of defines
+     *
+     * @return array
+     */
+    public function getDefines()
+    {
+        return $this->defines;
     }
 }

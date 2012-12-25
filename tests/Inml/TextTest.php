@@ -64,4 +64,26 @@ class TextTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertSame($out, (new Text('test'))->normalize($in));
     }
+
+    public function dataProviderTestGetDefines()
+    {
+        return [
+            ["", 0, []],
+            ["#key value", 0, ['key']],
+            ["#key value\nline", 1, ['key']],
+            ["#key value\nline\n#key value", 1, ['key']],
+        ];
+    }
+
+    /**
+     * @dataProvider dataProviderTestGetDefines
+     */
+    public function testGetDefines($string, $count, array $getDefines)
+    {
+        $text = new Text($string);
+
+        $this->assertSame($count, $text->getCount());
+        $this->assertSame($getDefines, array_keys($text->getDefines()));
+    }
+
 }
