@@ -151,7 +151,8 @@ class Word
      */
     public function isUrl()
     {
-        return (bool) filter_var($word = $this->rawString, FILTER_VALIDATE_URL);
+        return (bool) filter_var($word = $this->rawString,
+            FILTER_VALIDATE_URL);
     }
 
     /**
@@ -161,9 +162,8 @@ class Word
      */
     public function isEmail()
     {
-        $word = $this->word;
-        var_dump($word);
-        return (bool) filter_var($word, FILTER_VALIDATE_EMAIL);
+        return (bool) filter_var($word = $this->rawString,
+            FILTER_VALIDATE_EMAIL);
     }
 
     /**
