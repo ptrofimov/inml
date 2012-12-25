@@ -30,6 +30,13 @@ class Html implements \Inml\Render
      */
     private $htmlTags;
 
+    /**
+     * Array of defines
+     *
+     * @var array
+     */
+    private $defines = [];
+
     public function __construct()
     {
         $this->htmlTags = [
@@ -49,6 +56,8 @@ class Html implements \Inml\Render
      */
     public function render(Text $text)
     {
+        $this->defines = $text->getDefines();
+
         $out = '';
         foreach ($text as $paragraph) {
             $out .= $this->renderParagraph($paragraph);
@@ -85,6 +94,17 @@ class Html implements \Inml\Render
         }
         array_push($tags, $tag);
         foreach (array_reverse($tags) as $tag) {
+            if (!empty($tag['classes']))
+                foreach ($tag['classes'] as $key => $class) {
+                    if (isset($this->defines[$class])) {
+                        $url = $this->defines[$class]->getRawString();
+                        $content = "<a href=\"$url\">$content</a>";
+                        unset($tag['classes'][$key]);
+                        if (empty($tag['classes'])) {
+                            $tag = null;
+                        }
+                    }
+                }
             if (is_null($tag)) {
                 continue;
             } elseif (!empty($tag['classes'])) {

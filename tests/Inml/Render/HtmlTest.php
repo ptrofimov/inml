@@ -77,6 +77,8 @@ class HtmlTest extends \PHPUnit_Framework_TestCase
             [".style1.style2\nline", '<p class="style1 style2">line</p>'],
             [".style1\nline1\n\n.style2\nline2",
                 '<p class="style1">line1</p><p class="style2">line2</p>'],
+            ["#link domain.com\n\nlink.link",
+                '<p><a href="domain.com">link</a></p>'],
         ];
     }
 
