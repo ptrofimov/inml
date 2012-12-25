@@ -151,7 +151,7 @@ class Word
      */
     public function isUrl()
     {
-        return (bool) filter_var($word = $this->word, FILTER_VALIDATE_URL);
+        return (bool) filter_var($word = $this->rawString, FILTER_VALIDATE_URL);
     }
 
     /**

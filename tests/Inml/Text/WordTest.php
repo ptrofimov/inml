@@ -61,28 +61,28 @@ class WordTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($isDefine, $word->isDefine());
         $this->assertSame($getDefineKey, $word->getDefineKey());
     }
-//
-//    public function dataProviderTestIsUrl()
-//    {
-//        return [
-//            ['', false],
-//            ['link', false],
-//            ['domain.com', false],
-//            ['http://link', true],
-//            ['https://link', true],
-//            ['ftp://link', true],
-//            ['http://link/$0', true],
-//        ];
-//    }
-//
-//    /**
-//     * @dataProvider dataProviderTestIsUrl
-//     */
-//    public function testIsUrl($string, $isUrl)
-//    {
-//        $this->assertSame($isUrl, (new Word($string))->isUrl());
-//    }
-//
+
+    public function dataProviderTestIsUrl()
+    {
+        return [
+            ['', false],
+            ['link', false],
+            ['domain.com', false],
+            ['http://link', true],
+            ['https://link', true],
+            ['ftp://link', true],
+            ['http://link/$0', true],
+        ];
+    }
+
+    /**
+     * @dataProvider dataProviderTestIsUrl
+     */
+    public function testIsUrl($string, $isUrl)
+    {
+        $this->assertSame($isUrl, (new Word($string))->isUrl());
+    }
+
 //    public function dataProviderTestIsEmail()
 //    {
 //        return [
