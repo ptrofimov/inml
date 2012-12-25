@@ -128,14 +128,34 @@ class Line implements \Countable, \IteratorAggregate
         return !$this->getCount();
     }
 
-    /*public function isDefine()
+    /**
+     * True if line is define string
+     *
+     * @return bool
+     */
+    public function isDefine()
     {
-        return count($this->words) == 2
-            && substr($this->words[0], 0, 1) == self::CHAR_DEFINE;
+        return $this->getCount() == 2
+            && $this->words[0]->isDefine();
     }
 
-    public function getDefine()
+    /**
+     * Returns define string key
+     *
+     * @return string|null
+     */
+    public function getDefineKey()
     {
+        return $this->isDefine() ? $this->words[0]->getDefineKey() : null;
+    }
 
-    }*/
+    /**
+     * Returns \Inml\Text\Word instance for define string
+     *
+     * @return Word|null
+     */
+    public function getDefineWord()
+    {
+        return $this->isDefine() ? $this->words[1] : null;
+    }
 }

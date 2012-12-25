@@ -48,25 +48,34 @@ class LineTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($isStyle, $line->isStyle());
         $this->assertSame($hasStyles, $line->hasStyles());
     }
-//
-//    public function dataProviderTestDefine()
-//    {
-//        return [
-//            ['', false, []],
-//            ['#key', false, []],
-//            ['value', false, []],
-//            ['#key value', true, ['key' => 'value']],
-//        ];
-//    }
-//
-//    /**
-//     * @dataProvider dataProviderTestDefine
-//     */
-//    public function testDefine($string, $isDefine, array $getDefine)
-//    {
-//        $line = new Line($string);
-//
-//        $this->assertSame($isDefine, $line->isDefine());
-//        $this->assertSame($getDefine, $line->getDefine());
-//    }
+
+    public function dataProviderTestDefine()
+    {
+        return [
+            ['', false, null, null],
+            ['key', false, null, null],
+            ['#key', false, null, null],
+            ['#key value', true, 'key', 'value'],
+            ['#key value value', false, null, null],
+        ];
+    }
+
+    /**
+     * @dataProvider dataProviderTestDefine
+     */
+    public function testDefine($string, $isDefine,
+                               $getDefineKey, $getDefineWord)
+    {
+        $line = new Line($string);
+
+        $this->assertSame($isDefine, $line->isDefine());
+        $this->assertSame($getDefineKey, $line->getDefineKey());
+        if (is_null($getDefineWord)) {
+            $this->assertNull($line->getDefineWord());
+        } else {
+            $word = $line->getDefineWord();
+            $this->assertInstanceOf('\Inml\Text\Word', $word);
+            $this->assertSame($getDefineWord, $word->getWord());
+        }
+    }
 }
