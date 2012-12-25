@@ -56,8 +56,6 @@ class Line implements \Countable, \IteratorAggregate
                 $this->words[] = $word;
             }
         }
-        //count($this->words) == 2
-        //    && substr($this->words[0], 0, 1) == self::CHAR_DEFINE;
     }
 
     /**
@@ -107,7 +105,27 @@ class Line implements \Countable, \IteratorAggregate
      */
     public function count()
     {
+        return $this->getCount();
+    }
+
+    /**
+     * Returns count of words in line
+     *
+     * @return int
+     */
+    public function getCount()
+    {
         return count($this->words);
+    }
+
+    /**
+     * True if there are no words in line
+     *
+     * @return bool
+     */
+    public function isEmpty()
+    {
+        return !$this->getCount();
     }
 
     /*public function isDefine()

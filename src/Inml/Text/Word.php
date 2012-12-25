@@ -47,7 +47,11 @@ class Word
     public function __construct($string)
     {
         $this->rawString = $string;
-        if ($this->isUrl() || $this->isEmail() || $this->isFilePath()) {
+        if ($this->isDefine()
+            || $this->isUrl()
+            || $this->isEmail()
+            || $this->isFilePath()
+        ) {
             $this->word = $string;
             return;
         }
