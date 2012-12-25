@@ -24,7 +24,10 @@ class TextTest extends \PHPUnit_Framework_TestCase
     {
         $text = new Text($string);
 
+        $this->assertSame($count, $text->getCount());
         $this->assertSame($count, count($text));
+        $this->assertSame($count > 0 ? false : true, $text->isEmpty());
+        $this->assertSame($string, $text->getRawString());
 
         foreach ($text as $paragraph) {
             $this->assertInstanceOf('\Inml\Text\Paragraph', $paragraph);
