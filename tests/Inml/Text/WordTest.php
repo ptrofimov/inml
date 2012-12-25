@@ -101,4 +101,21 @@ class WordTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertSame($isEmail, (new Word($string))->isEmail());
     }
+
+    public function dataProviderTestIsFilePath()
+    {
+        return [
+            ['', false],
+            ['file', false],
+            ['/path/to/file', true],
+        ];
+    }
+
+    /**
+     * @dataProvider dataProviderTestIsFilePath
+     */
+    public function testIsFilePath($string, $isFilePath)
+    {
+        $this->assertSame($isFilePath, (new Word($string))->isFilePath());
+    }
 }

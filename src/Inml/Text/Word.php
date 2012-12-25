@@ -47,11 +47,7 @@ class Word
     public function __construct($string)
     {
         $this->rawString = $string;
-        if (
-            strpos($string, '@') !== false
-            || strpos($string, '\\') !== false
-            || strpos($string, '/') !== false
-        ) {
+        if ($this->isUrl() || $this->isEmail() || $this->isFilePath()) {
             $this->word = $string;
             return;
         }
@@ -164,6 +160,16 @@ class Word
     {
         return (bool) filter_var($word = $this->rawString,
             FILTER_VALIDATE_EMAIL);
+    }
+
+    /**
+     * True if word is Unix filepath
+     *
+     * @return bool
+     */
+    public function isFilePath()
+    {
+        return strpos($this->rawString, '/') !== false;
     }
 
     /**
