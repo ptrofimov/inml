@@ -9,6 +9,11 @@ namespace Inml\Text;
 class Paragraph implements \Countable, \IteratorAggregate
 {
     /**
+     * Separator char for paragraphs
+     */
+    const SEPARATOR = "\n\n";
+
+    /**
      * Delimiter char for lines
      */
     const CHAR_LINE = "\n";

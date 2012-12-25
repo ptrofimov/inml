@@ -13,11 +13,6 @@ use \Inml\Text\Word;
 class Text implements \Countable, \IteratorAggregate
 {
     /**
-     * Delimiter char for paragraphs
-     */
-    const CHAR_PARAGRAPH = "\n\n";
-
-    /**
      * Array of Paragraph objects
      *
      * @var Paragraph[]
@@ -31,10 +26,9 @@ class Text implements \Countable, \IteratorAggregate
      */
     public function __construct($string)
     {
-        $parts = explode(self::CHAR_PARAGRAPH,
-            $this->normalize($string));
-        foreach ($parts as $item) {
-            $paragraph = new Paragraph($item);
+        $parts = explode(Paragraph::SEPARATOR, $this->normalize($string));
+        foreach ($parts as $part) {
+            $paragraph = new Paragraph($part);
             if (count($paragraph)) {
                 $this->paragraphs[] = $paragraph;
             }
@@ -56,7 +50,7 @@ class Text implements \Countable, \IteratorAggregate
         $text = preg_replace('/[ \t]+/', ' ', trim($text));
         $text = str_replace("\r\n", Paragraph::CHAR_LINE, $text);
         $text = str_replace("\r", Paragraph::CHAR_LINE, $text);
-        $text = preg_replace('/[\n]{2,}/', self::CHAR_PARAGRAPH, $text);
+        $text = preg_replace('/[\n]{2,}/', Paragraph::SEPARATOR, $text);
         $text = preg_replace('/ ?\n ?/', Paragraph::CHAR_LINE, $text);
 
         return $text;
