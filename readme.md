@@ -1,6 +1,9 @@
-# inML - inline markup language
+# inML - intuitive markup language
 
-*PHP-written script in order to transform inML-formatted text into HTML.*
+*inML is concise and intuitive markup language. This repository contains description of inML markup language
+and PHP-written library and example script in order to render inML-formatted text into HTML and Text formats.*
+
+* [Basic inML transformation rules](https://github.com/ptrofimov/inml/edit/master/readme.md#basic-inml-transformation-rules)
 
 ## Basic inML transformation rules
 
