@@ -14,6 +14,7 @@ class TextTest extends \PHPUnit_Framework_TestCase
             ["", 0],
             ["paragraph", 1],
             ["paragraph1\n\nparagraph2", 2],
+            ["paragraph1\n\nparagraph2\n\nparagraph3", 3],
         ];
     }
 
