@@ -33,6 +33,8 @@ class LineTest extends \PHPUnit_Framework_TestCase
     {
         $line = new Line($string);
 
+        $this->assertSame($string, $line->getRawString());
+
         $this->assertSame($count, count($line));
         $this->assertSame($count, $line->getCount());
         $this->assertSame($count > 0 ? false : true, $line->isEmpty());

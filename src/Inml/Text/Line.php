@@ -33,11 +33,11 @@ class Line implements \Countable, \IteratorAggregate
     private $styles = [];
 
     /**
-     * Define string
+     * Non-parsed string
      *
-     * @var array
+     * @var string
      */
-    private $define = [];
+    private $rawString;
 
     /**
      * Constructor
@@ -46,6 +46,7 @@ class Line implements \Countable, \IteratorAggregate
      */
     public function __construct($string)
     {
+        $this->rawString = $string;
         $parts = explode(self::CHAR_WORD, $string);
         foreach ($parts as $item) {
             $word = new Word($item);
@@ -157,5 +158,15 @@ class Line implements \Countable, \IteratorAggregate
     public function getDefineWord()
     {
         return $this->isDefine() ? $this->words[1] : null;
+    }
+
+    /**
+     * Returns non-parsed string
+     *
+     * @return string
+     */
+    public function getRawString()
+    {
+        return $this->rawString;
     }
 }
