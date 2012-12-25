@@ -40,6 +40,13 @@ Paragraph.   =>       Paragraph.
                   </div>
 ```
 
+* 5. You can define your own styles right in the document. Parser will automatically recognise type of style. For example, you can make a hyperlink by defining your own style with url:
+
+```html
+inML.link is intuitive markup language.        
+                                          =>   <a href="https://github.com/ptrofimov/inml">inML</a>
+#link https://github.com/ptrofimov/inml            is intuitive markup language.
+```
 
 ## Example
 
