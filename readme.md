@@ -4,8 +4,8 @@
 and PHP-written library and example script in order to render inML-formatted text into HTML and Text formats.*
 
 * [Basic inML -> HTML transformation rules](https://github.com/ptrofimov/inml/edit/master/readme.md#basic-inml---html-transformation-rules)
-* [Example](https://github.com/ptrofimov/inml/edit/master/readme.md#example)
-* [Installation](https://github.com/ptrofimov/inml/edit/master/readme.md#installation)
+* [Example with screenshots](https://github.com/ptrofimov/inml/edit/master/readme.md#example-with-screenshots)
+* [Installation and usage](https://github.com/ptrofimov/inml/edit/master/readme.md#installation-and-usage)
 
 ## Basic inML -> HTML transformation rules
 
@@ -50,7 +50,7 @@ inML.link is intuitive markup language.
 #link https://github.com/ptrofimov/inml            is intuitive markup language.
 ```
 
-## Example
+## Example with screenshots
 
 inML-formatted text:
 
@@ -93,7 +93,7 @@ and looks like this (with predefined CSS styles):
 
 ![Example inML to HTML transformation](https://raw.github.com/ptrofimov/inml/master/examples/example.jpg)
 
-## Installation
+## Installation and usage
 
 * 1. Install [composer](http://getcomposer.org/download/) if need.
 * 2. Create composer.json or add dependency:
@@ -112,7 +112,7 @@ and looks like this (with predefined CSS styles):
 composer install
 ```
 
-* 4. Usage:
+* 4. Usage example:
  
 ```php
 use \Inml\Text;
